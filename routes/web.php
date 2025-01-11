@@ -14,3 +14,14 @@ $router->group([
     $router->post('refresh', 'AuthController@refresh');
     $router->post('user-profile', 'AuthController@me');
 });
+
+$router->group([
+    'prefix' => 'api/products',
+    'middleware' => 'auth'
+], function ($router) {
+    $router->get('/', 'ProductController@index');       
+    $router->post('/', 'ProductController@store');       
+    $router->get('/{id}', 'ProductController@show');     
+    $router->put('/{id}', 'ProductController@update');   
+    $router->delete('/{id}', 'ProductController@destroy');
+});
